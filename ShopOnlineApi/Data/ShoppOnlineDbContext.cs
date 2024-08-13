@@ -138,7 +138,7 @@ namespace ShopOnlineApi.Data
 				Price = 100,
 				Qty = 60,
 				CategoryId = 3
-			});
+			});	
 			//Furniture Category
 			modelBuilder.Entity<Product>().HasData(new Product
 			{
