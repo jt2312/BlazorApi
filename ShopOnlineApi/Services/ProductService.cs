@@ -12,19 +12,23 @@ namespace ShopOnlineApi.Services
 			_shoppOnlineDbContext = shoppOnlineDbContext;
             
         }
-        public Task<ProductCategory> GetCategoryById(int Id)
+        public async Task<ProductCategory> GetCategoryById(int Id)
 		{
-			throw new NotImplementedException();
+			var category = await _shoppOnlineDbContext.productCategories.SingleOrDefaultAsync(x => x.Id == Id);
+
+			return category;
+		
 		}
 
-		public Task<Product> GetItembyId(int Id)
+		public async Task<Product> GetItembyId(int Id)
 		{
-			throw new NotImplementedException();
+			var product = await _shoppOnlineDbContext.Products.FindAsync(Id);
+			return product;
 		}
 
 		public async Task<IEnumerable<ProductCategory>> GetCategories()
 		{
-			var categories = await this._shoppOnlineDbContext.productCategories.ToListAsync();
+			var categories = await _shoppOnlineDbContext.productCategories.ToListAsync();
 			return categories;
 		}
 

@@ -11,13 +11,54 @@ namespace ShoppOnline.Services.Interfaces
         {
 			_http = Http;
 		}
-        public async Task<IEnumerable<ProductDTO>> GetItems()
+
+		public async Task<ProductDTO> GetItem(int id)
 		{
 			try
 			{
-				var products = await this._http.GetFromJsonAsync<IEnumerable<ProductDTO>>("api/Product");
-				return products;	
-			
+				var response = await _http.GetAsync($"api/Product/{id}");
+				if (response.IsSuccessStatusCode)
+				{
+					if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+					{
+						return default(ProductDTO);
+					}
+					return await response.Content.ReadFromJsonAsync<ProductDTO>();
+				}
+				else
+				{
+					var message  = await response.Content.ReadAsStringAsync();
+					throw new Exception(message);
+				}
+			}
+			catch (Exception)
+			{
+				throw;
+				
+			}
+		}
+
+		public async Task<IEnumerable<ProductDTO>> GetItems()
+		{
+			try
+			{
+				var response = await this._http.GetAsync("api/Product");
+				if (response.IsSuccessStatusCode)
+				{
+					if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+					{
+						return Enumerable.Empty<ProductDTO>();
+					}
+					return await response.Content.ReadFromJsonAsync<IEnumerable<ProductDTO>>();
+
+				}
+				else 
+				{
+					var message = await response.Content.ReadAsStringAsync();
+					throw new Exception(message);
+				}
+
+
 			}
 			catch (Exception)
 			{
