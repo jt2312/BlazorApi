@@ -23,5 +23,19 @@ namespace ShoppOnline.Pages
 				ErrorMessage = ex.Message;	
 			}
 		}
-	}
+        protected async Task AddToCart_Click(CartItemToAddDTO cartItemToAddDTO)
+		{
+			try
+			{
+
+			}
+			catch (Exception)
+			{ 
+
+				throw;
+			}
+		} 
+
+
+    }
 }

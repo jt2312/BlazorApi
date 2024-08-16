@@ -65,7 +65,7 @@ namespace ShopOnlineApi.Services
 						  on cart.Id equals cartItem.CartId
 						  where cartItem.Id == id
 						  select new CartItem
-						  {
+						  {	
 							  Id = cartItem.Id,
 							  ProductId = cartItem.ProductId,
 							  Qty = cartItem.Qty,
