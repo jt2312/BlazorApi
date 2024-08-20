@@ -4,9 +4,9 @@ namespace ShoppOnline.Services.Interfaces
 {
 	public interface IShoppingCartService
 	{
-		Task<IEnumerable<CartItemDTO>> GetItems(int userId);
+		Task<List<CartItemDTO>> GetItems(int userId);
 		Task<CartItemDTO> AddItem(CartItemToAddDTO cartItemToAddDto);
 
-
+		Task<CartItemDTO> DeleteItem (int Id);
 	}
 }

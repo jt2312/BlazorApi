@@ -4,11 +4,11 @@ using ShoppOnline.Services.Interfaces;
 
 namespace ShoppOnline.Pages
 {
-    public class ShoppingCartBase:ComponentBase
+    public class ShoppingCartBase : ComponentBase
     {
         [Inject]
         public IShoppingCartService ShoppingCartService { get; set; }
-        public IEnumerable<CartItemDTO> ShoppingCartItems { get; set; }
+        public List<CartItemDTO> ShoppingCartItems { get; set; }
 
         public string ErrorMessage { get; set; }
 
@@ -19,11 +19,31 @@ namespace ShoppOnline.Pages
             {
                 ShoppingCartItems = await ShoppingCartService.GetItems(HardCoded.UserId);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
 
                 ErrorMessage = ex.Message;
             }
         }
+
+        protected async Task DeleteCartItem_Click(int id)
+        {
+            var cartItemDto = await ShoppingCartService.DeleteItem(id);
+
+            RemoveCartItem(id);
+
+        }
+
+        private CartItemDTO GetCartItem(int id)
+        {
+            return ShoppingCartItems.FirstOrDefault(i => i.Id == id);
+
+        }
+        private void RemoveCartItem(int id)
+        {
+            var CartItemDto= GetCartItem(id);
+            ShoppingCartItems.Remove(CartItemDto);
+        }
+            
     }
 }
