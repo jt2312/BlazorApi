@@ -17,7 +17,8 @@ namespace ShopOnlineApi.Services
 		private async Task<bool> CartItemExists(int cartId, int productId)
 		{
 			return await this._ShoppOnlineDbContext.CartItems.AnyAsync(
-				c => c.CartId == cartId && c.ProductId == productId);
+				c => c.CartId == cartId && 
+				c.ProductId == productId);
 
 		}
 		public async Task<CartItem> AddItem(CartItemToAddDTO cartItemToAddDTO)
@@ -57,7 +58,7 @@ namespace ShopOnlineApi.Services
 			return item;
 
 		}
-
+		  
 		public async Task<CartItem> GetItem(int id)
 		{
 			return await (from cart in this._ShoppOnlineDbContext.Carts

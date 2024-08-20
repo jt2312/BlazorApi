@@ -1,4 +1,5 @@
 ﻿using ShopOnlineModels.Dtos;
+using ShoppOnline.Pages;
 using ShoppOnline.Services.Interfaces;
 using System.Net.Http.Json;
 
@@ -11,7 +12,6 @@ namespace ShoppOnline.Services
         {
             _httpClient = httpClient;
         }
-        public event Action<int> OnShoppingCartChanged;
 
         public async Task<CartItemDTO> AddItem(CartItemToAddDTO cartItemToAddDto)
         {
@@ -39,22 +39,20 @@ namespace ShoppOnline.Services
             }
         }
 
-        public Task<CartItemDTO> DeleteItem(int id)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public async Task<IEnumerable<CartItemDTO>> GetItems(int userId)
         {
             try
             {
-                var response = await _httpClient.GetAsync($"api/{userId}/GetItems");
+                
+                var response = await _httpClient.GetAsync($"api/ShoppingCart/{userId}/GetItems");
 
                 if (response.IsSuccessStatusCode)
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                     {
-                        return Enumerable.Empty<CartItemDTO>(); 
+                        return Enumerable.Empty<CartItemDTO>();
                     }
                     return await response.Content.ReadFromJsonAsync<IEnumerable<CartItemDTO>>();
                 }
@@ -73,14 +71,6 @@ namespace ShoppOnline.Services
 
         }
 
-        public void RaiseEventOnShoppingCartChanged(int totalQty)
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task<CartItemDTO> UpdateQty(CartItemQtyUpdateDTO cartItemQtyUpdateDto)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

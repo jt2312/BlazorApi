@@ -4,7 +4,7 @@ using ShopOnlineApi.Models;
 
 namespace ShopOnlineApi.Services
 {
-	public class ProductService : IProductService
+    public class ProductService : IProductService
 	{
 		private readonly ShoppOnlineDbContext _shoppOnlineDbContext;
         public ProductService(ShoppOnlineDbContext shoppOnlineDbContext)

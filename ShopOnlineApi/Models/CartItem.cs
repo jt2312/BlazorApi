@@ -9,8 +9,7 @@ namespace ShopOnlineApi.Models
 		public int ProductId { get; set; }
 		public int Qty { get; set; }
 		
-		//to do: eliminar 
-		//public int CategoryId { get; set; }
+
 
 	}
 }

@@ -6,11 +6,7 @@ namespace ShoppOnline.Services.Interfaces
 	{
 		Task<IEnumerable<CartItemDTO>> GetItems(int userId);
 		Task<CartItemDTO> AddItem(CartItemToAddDTO cartItemToAddDto);
-		Task<CartItemDTO> DeleteItem(int id);
-		Task<CartItemDTO> UpdateQty(CartItemQtyUpdateDTO cartItemQtyUpdateDto);
 
-		event Action<int> OnShoppingCartChanged;
-		void RaiseEventOnShoppingCartChanged(int totalQty);
 
 	}
 }

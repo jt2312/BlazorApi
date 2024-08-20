@@ -16,8 +16,8 @@ namespace ShopOnlineApi.Controllers
 		public ShoppingCartController(IShoppingCartService ShoppingCartService,
 									  IProductService ProductService)
 		{
-			_ShoppingCartService = ShoppingCartService;
-			_ProductService = ProductService;
+			this._ShoppingCartService = ShoppingCartService;
+			this._ProductService = ProductService;
 		}
 
 		[HttpGet]

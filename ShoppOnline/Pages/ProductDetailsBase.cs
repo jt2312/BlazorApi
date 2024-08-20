@@ -10,6 +10,11 @@ namespace ShoppOnline.Pages
 		public int Id { get; set; }
 		[Inject]
 		public IProductService ProductService { get; set; }
+		[Inject]
+		public IShoppingCartService ShoppingCartService { get; set; }
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
 		public ProductDTO Product { get; set; }
 		public string ErrorMessage { get; set; }
 		protected override async Task OnInitializedAsync()
@@ -27,12 +32,12 @@ namespace ShoppOnline.Pages
 		{
 			try
 			{
-
+				var cartItemDTO = await ShoppingCartService.AddItem(cartItemToAddDTO);
+				NavigationManager.NavigateTo("/ShoppingCart");
 			}
 			catch (Exception)
 			{ 
-
-				throw;
+				
 			}
 		} 
 

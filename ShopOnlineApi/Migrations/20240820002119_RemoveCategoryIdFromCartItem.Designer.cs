@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopOnlineApi.Data;
 
@@ -10,9 +11,10 @@ using ShopOnlineApi.Data;
 namespace ShopOnlineApi.Migrations
 {
     [DbContext(typeof(ShoppOnlineDbContext))]
-    partial class ShoppOnlineDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240820002119_RemoveCategoryIdFromCartItem")]
+    partial class RemoveCategoryIdFromCartItem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
