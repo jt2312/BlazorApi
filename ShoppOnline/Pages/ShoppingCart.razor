@@ -27,9 +27,9 @@ else
                             <h5>@item.ProductName</h5>
                             <div class="mb-4">@item.ProductDescrition</div>
                             <span>Price: <b>@item.Price.ToString("C")</b>
-                                <input @oninput="()=> UpdateQty_Input(item.Id)" />
-                                <input type="number" @bind="@item.Qty" />
-                                <button data-itemId="@item.Id" class="btn btn-info"
+                                <input @oninput="()=> UpdateQty_Input(item.Id)" 
+                                type="number" @bind="@item.Qty" />
+                                <button data-itemId="@item.Id" class="btn btn-info btn-sm update-qty"
                                         @onclick="(() => UpdateQtyCartItem_Click(item.Id,item.Qty))">Update Qty</button>
                             </span>
                             <div>

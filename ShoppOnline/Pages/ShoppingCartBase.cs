@@ -39,8 +39,9 @@ namespace ShoppOnline.Pages
         }
         private async Task MakeUpdateQtyButtonVisible(int id, bool visible)
         {
-            await Js.InvokeVoidAsync("MakeUpdateQtyButtonVisible", id , visible);
+            await Js.InvokeVoidAsync("MakeUpdateQtyButtonVisible", id, visible);
         }
+
         protected async Task DeleteCartItem_Click(int id)
         {
             var cartItemDto = await ShoppingCartService.DeleteItem(id);
