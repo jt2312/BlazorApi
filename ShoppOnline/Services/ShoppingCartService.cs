@@ -2,6 +2,10 @@
 using ShoppOnline.Pages;
 using ShoppOnline.Services.Interfaces;
 using System.Net.Http.Json;
+using Newtonsoft.Json;
+using System.Text.Json.Serialization;
+using System.Text;
+using System.Net.Http;
 
 namespace ShoppOnline.Services
 {
@@ -89,6 +93,29 @@ namespace ShoppOnline.Services
 
         }
 
+        public async Task<CartItemDTO> UpdateQty(CartItemQtyUpdateDTO cartItemQtyUpdateDTO)
+        {
+            try
+            {
+                var jsonRequest = JsonConvert.SerializeObject(cartItemQtyUpdateDTO);
+                var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json-patch+json");
 
+                var response = await _httpClient.PatchAsync($"api/ShoppingCart/{cartItemQtyUpdateDTO.CartItemId}", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadFromJsonAsync<CartItemDTO>();
+                }
+                return null;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+
+        }
     }
 }
