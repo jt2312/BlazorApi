@@ -12,12 +12,16 @@ namespace ShoppOnline.Services
     public class ShoppingCartService : IShoppingCartService
     {
         private readonly HttpClient _httpClient;
+        
+
         public ShoppingCartService(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
 
-        public async Task<CartItemDTO> AddItem(CartItemToAddDTO cartItemToAddDto)
+		public event Action<int> OnShoppingCartChanged;
+
+		public async Task<CartItemDTO> AddItem(CartItemToAddDTO cartItemToAddDto)
         {
             try
             {
@@ -91,6 +95,14 @@ namespace ShoppOnline.Services
             }
 
 
+        }
+
+        public void RaiseEventOnShoppingCartChanged(int totalqty)
+        {
+            if (OnShoppingCartChanged != null)
+            {
+                OnShoppingCartChanged.Invoke(totalqty);
+            }
         }
 
         public async Task<CartItemDTO> UpdateQty(CartItemQtyUpdateDTO cartItemQtyUpdateDTO)

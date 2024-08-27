@@ -9,5 +9,8 @@ namespace ShoppOnline.Services.Interfaces
 		Task<CartItemDTO> DeleteItem (int Id);
 		Task<CartItemDTO> UpdateQty(CartItemQtyUpdateDTO cartItemQtyUpdateDTO);
 
+		event Action<int> OnShoppingCartChanged;
+		void RaiseEventOnShoppingCartChanged(int totalqty);
+
 	}
 }

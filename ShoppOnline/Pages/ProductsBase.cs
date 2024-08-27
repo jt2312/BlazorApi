@@ -9,11 +9,29 @@ namespace ShoppOnline.Pages
 		[Inject]
         public IProductService ProductService { get; set; }
 		public IEnumerable<ProductDTO> Products { get; set; }
+        [Inject]
+        public IShoppingCartService ShoppingCartService { get; set; }
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
 
-		protected override async Task OnInitializedAsync()
+        public string ErrorMessage { get; set; }
+
+        protected override async Task OnInitializedAsync()
 		{
-			Products = await ProductService.GetItems();
+			try
+			{
+                Products = await ProductService.GetItems();
+				var shppingCartItems = await ShoppingCartService.GetItems(HardCoded.UserId);
+				var totalQty = shppingCartItems.Sum(x => x.Qty);
+				ShoppingCartService.RaiseEventOnShoppingCartChanged(totalQty);
+            }
+            catch (Exception)
+			{
+
+				throw;
+			}
 		}
+
 
 		protected IOrderedEnumerable<IGrouping<int, ProductDTO>> GetGroupedProductsByCategory()
 		{
