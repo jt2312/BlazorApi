@@ -8,5 +8,7 @@ namespace ShopOnlineApi.Services
         Task<IEnumerable<ProductCategory>> GetCategories();
         Task<Product> GetItembyId(int Id);
         Task<ProductCategory> GetCategoryById(int Id);
+        Task<IEnumerable<Product>> GetItemsByCategory(int id);
+
     }
 }

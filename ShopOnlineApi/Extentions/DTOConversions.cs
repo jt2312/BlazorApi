@@ -5,7 +5,17 @@ namespace ShopOnlineApi.Extentions
 {
 	public static class DTOConversions
 	{
-		public static IEnumerable<ProductDTO> ConverToDto(this IEnumerable<Product> products,
+        public static IEnumerable<ProductCategoryDTO> ConvertToDto(this IEnumerable<ProductCategory> productCategories)
+        {
+            return (from productCategory in productCategories
+                    select new ProductCategoryDTO
+                    {
+                        Id = productCategory.Id,
+                        Name = productCategory.Name,
+                        IconCSS = productCategory.IconCSS
+                    }).ToList();
+        }
+        public static IEnumerable<ProductDTO> ConverToDto(this IEnumerable<Product> products,
 																IEnumerable<ProductCategory> productCategories)
 		{
 			return (from product in products
@@ -75,7 +85,22 @@ namespace ShopOnlineApi.Extentions
 				TotalPrice = product.Price * cartItem.Qty
 			};
 		}
+        public static IEnumerable<ProductDTO> ConvertToDto(this IEnumerable<Product> products)
+        {
+            return (from product in products
+                    select new ProductDTO
+                    {
+                        Id = product.Id,
+                        Name = product.Name,
+                        Description = product.Description,
+                        ImageURL = product.ImageURL,
+                        Price = product.Price,
+                        Qty = product.Qty,
+                        CategoryId = product.ProductCategory.Id,
+                        CategoryName = product.ProductCategory.Name
+                    }).ToList();
 
+        }
 
-	}
+    }
 }
